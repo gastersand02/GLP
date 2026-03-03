@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -21,7 +22,10 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-  
+        if (healthamount <= 0)
+        {
+            SceneManager.LoadScene("Lose");
+        }
 
         ammotext.text = "Ammo Left: " + AmmoCount;
     }

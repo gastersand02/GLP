@@ -38,6 +38,12 @@ public class EnemyAI : MonoBehaviour
     PlayerMovement PlayerMovement;
     private Rigidbody rb;
 
+    [Header("Death audio")]
+    [Tooltip("Optional sound to play when this enemy dies.")]
+    public AudioClip deathClip;
+    [Range(0f, 1f)]
+    public float deathVolume = 1f;
+
     [Header("Drops (simple single-drop)")]
     [Tooltip("Optional single prefab to drop. If assigned, this will be used instead of dropTable.")]
     public GameObject singleDropPrefab;
@@ -187,7 +193,8 @@ public class EnemyAI : MonoBehaviour
 
     private void Dead()
     {
-        // mark as died so OnDestroy can know this was a death
+        // guard to avoid double-death
+        if (_died) return;
         _died = true;
 
         animator.SetBool("IsDead", true);
@@ -198,6 +205,9 @@ public class EnemyAI : MonoBehaviour
             var fx = Instantiate(deathFX, this.transform.position, this.transform.rotation);
             Destroy(fx, destroyDelay);
         }
+
+        // play death sound (uses PlayClipAtPoint so audio continues after this GameObject is destroyed)
+        PlayDeathSound();
 
         // schedule actual GameObject destruction (OnDestroy will run then and attempt drop once)
         Destroy(gameObject, 1f);
@@ -213,6 +223,15 @@ public class EnemyAI : MonoBehaviour
 
         RotateTowards(transform.position);
         speed = 0f;
+    }
+
+    private void PlayDeathSound()
+    {
+        if (deathClip == null) return;
+
+        // Prefer camera position for consistent volume in many setups; fall back to enemy position.
+        Vector3 pos = (Camera.main != null) ? Camera.main.transform.position : transform.position;
+        AudioSource.PlayClipAtPoint(deathClip, pos, deathVolume);
     }
 
     private void TrySpawnDrop()

@@ -4,5 +4,17 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: c4dbb2a4c2d6ee54a88b0f94cb8caa57
+  - enabled: 1
+    path: Assets/Scenes/Kasper.unity
+    guid: 7181b9162537f1448857ca899f7b511c
+  - enabled: 1
+    path: Assets/Scenes/Lose.unity
+    guid: 072b10a86c43d1d409dea3699c813f3a
+  - enabled: 1
+    path: Assets/Scenes/Win.unity
+    guid: d91ed670d83330f43ae6435ace734921
   m_configObjects: {}

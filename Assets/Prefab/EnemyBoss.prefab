@@ -1049,9 +1049,14 @@ MonoBehaviour:
   damageHard: 50
   destroyDelay: 3
   deathFX: {fileID: 100008, guid: 7075bd5fe1480184695a32611c15da57, type: 3}
+  deathClip: {fileID: 8300000, guid: a05b1df4fedb0ed45bddba7f8668d371, type: 3}
+  deathVolume: 1
   singleDropPrefab: {fileID: 0}
   singleDropChance: 1
-  dropTable: []
+  dropTable:
+  - prefab: {fileID: 0}
+    chance: 0
+    spawnOffsetY: 0
 --- !u!195 &1655156997369933824
 NavMeshAgent:
   m_ObjectHideFlags: 0
